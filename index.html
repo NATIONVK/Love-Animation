@@ -1,1 +1,86 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090510"><meta name="description" content="I Love You — Infinity, an immersive cinematic love experience."><link rel="manifest" href="./manifest.json"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet"><link rel="stylesheet" href="./css/main.css"><link rel="stylesheet" href="./css/scenes.css"><link rel="stylesheet" href="./css/animations.css"><title>I LOVE YOU — INFINITY ❤️</title></head><body><div id="app" class="app"><canvas id="cinema"></canvas><div class="film-grain"></div><div class="edge-vignette"></div><div class="intro" id="intro"><div class="intro-stars"></div><p class="intro-kicker">A story written in starlight</p><h1>Every beautiful story<br>begins somewhere<span>.</span></h1><p class="intro-second">And this one begins with <em>YOU.</em></p><button id="startBtn" class="start-button">START EXPERIENCE <span>✦</span></button><div class="intro-bottom">BEST EXPERIENCED WITH SOUND ON</div></div><div class="cinema-copy" id="cinemaCopy"><p class="copy-kicker" id="copyKicker"></p><h2 id="copyTitle"></h2><p id="copyBody"></p></div><div class="letter-overlay" id="letterOverlay" aria-hidden="true"><div class="envelope"><div class="envelope-back"></div><div class="letter-paper"><div class="letter-heading">To my favourite person</div><p id="letterText">Dear You,<br><br>I don't know how to explain everything I feel.<br><br>Sometimes words are too small to express what the heart carries.<br><br>You make ordinary moments feel extraordinary.<br><br>And if I had to choose again, in every lifetime, in every universe, I would still choose you.<br><br>With all my heart. ❤️</p><div class="letter-signature" id="letterSignature">Forever yours</div></div><div class="envelope-flap"></div><div class="envelope-seal">♥</div></div><button class="letter-close" id="letterClose">CLOSE LETTER</button></div><div class="finale" id="finale"><p>OUT OF ALL THE STARS IN THE UNIVERSE</p><h2 id="finalTitle">I LOVE YOU</h2><div class="final-heart">♥</div><h3 id="finalMessage">IN EVERY UNIVERSE.<br>IN EVERY LIFETIME.<br><em>ALWAYS YOU. ❤️</em></h3></div><div class="hud" id="hud"><div class="hud-top"><div class="brand-mark">I<span>∞</span>U <small>INFINITY EXPERIENCE</small></div><div class="scene-counter" id="sceneCounter">01 / 15</div></div><div class="hud-bottom"><div class="progress-track"><div id="progressBar"></div></div><div class="control-row"><button id="prevBtn" aria-label="Previous scene">‹</button><button id="replayBtn" aria-label="Replay from beginning">↻</button><button id="playBtn" aria-label="Pause or resume">Ⅱ</button><button id="nextBtn" aria-label="Next scene">›</button><select id="sceneSelect" aria-label="Choose scene"></select><button id="audioBtn" aria-label="Toggle music">♫</button><button id="settingsBtn" aria-label="Open settings">⚙</button><button id="fullBtn" aria-label="Fullscreen">⛶</button></div></div></div><div class="settings-panel" id="settingsPanel"><div class="panel-head"><span>EXPERIENCE SETTINGS</span><button id="settingsClose">×</button></div><label>Music & ambience<input id="volume" type="range" min="0" max="1" step=".01" value=".35"></label><label>Visual quality<select id="quality"><option value="low">Low · Battery friendly</option><option value="medium" selected>Medium · Balanced</option><option value="high">High · Cinematic</option></select></label><label class="check-row"><input id="reducedMotion" type="checkbox"> Reduced motion</label><label class="check-row"><input id="cinemaMode" type="checkbox"> Cinematic mode</label><button id="customizeBtn" class="panel-action">CUSTOMIZE YOUR MESSAGE</button></div><div class="custom-panel" id="customPanel"><div class="panel-head"><span>YOUR STORY</span><button id="customClose">×</button></div><label>Recipient name<input id="recipient" maxlength="32" placeholder="Your special someone"></label><label>Sender name<input id="sender" maxlength="32" placeholder="Your name"></label><label>Opening title<input id="customTitle" maxlength="50" value="I LOVE YOU"></label><label>Final message<textarea id="customMessage" rows="3">IN EVERY UNIVERSE. IN EVERY LIFETIME. ALWAYS YOU. ❤️</textarea></label><label>Heart colour<input id="heartColor" type="color" value="#ff3f78"></label><button id="saveCustom" class="panel-action">SAVE MY STORY</button></div></div><script type="module" src="./js/app.js"></script><script>if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./service-worker.js').catch(()=>{});</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08030b">
+<meta name="description" content="A continuous cinematic heart animation with floating particles and glowing romantic light.">
+<title>Love — Infinite Glow</title>
+<style>
+:root{color-scheme:dark;--pink:#ff4f91;--rose:#ff174f;--violet:#a855f7}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08030b}
+body{font-family:Georgia,'Times New Roman',serif;color:#fff}
+.scene{position:relative;width:100%;height:100%;min-height:100svh;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 47%,#321020 0%,#190914 35%,#0b0610 68%,#050308 100%)}
+.scene:before,.scene:after{content:"";position:absolute;inset:-30%;pointer-events:none;z-index:-1}
+.scene:before{background:conic-gradient(from 0deg at 50% 50%,transparent 0 22%,#ff287015 28%,transparent 38% 62%,#a855f714 72%,transparent 83%);filter:blur(65px);animation:aurora 28s linear infinite}
+.scene:after{background:radial-gradient(ellipse at center,transparent 25%,#030106aa 100%)}
+#particles{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.ambient{position:absolute;width:min(80vw,620px);aspect-ratio:1;left:50%;top:47%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#ff1b5b25 0%,#d4146a12 35%,transparent 70%);filter:blur(22px);animation:breathe 5s ease-in-out infinite;z-index:0}
+.content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;z-index:2}
+.heart-wrap{position:relative;width:min(57vw,330px);height:min(57vw,330px);display:grid;place-items:center;filter:drop-shadow(0 0 18px #ff1d6288) drop-shadow(0 0 55px #ff1d6244);animation:heartFloat 6s ease-in-out infinite}
+.heart-wrap:before,.heart-wrap:after{content:"";position:absolute;inset:12%;border:1px solid #ff7eae38;border-radius:50%;animation:ring 6s ease-out infinite}
+.heart-wrap:after{animation-delay:3s}
+.heart{width:100%;height:100%;overflow:visible;animation:heartbeat 2.15s ease-in-out infinite;transform-origin:50% 55%}
+.heart path{fill:url(#heartFill);stroke:#ff9cbd;stroke-width:1.2;filter:url(#glow)}
+.sparkle{position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px 3px #ff75ac,0 0 22px 7px #ff286c88;animation:twinkle 2.8s ease-in-out infinite}
+.sparkle.s1{top:12%;left:17%}.sparkle.s2{top:24%;right:9%;animation-delay:.8s;width:4px;height:4px}.sparkle.s3{bottom:17%;left:12%;animation-delay:1.5s;width:5px;height:5px}.sparkle.s4{bottom:12%;right:17%;animation-delay:.4s}
+h1{margin:26px 0 8px;font-size:clamp(28px,6vw,54px);font-weight:400;letter-spacing:.18em;text-transform:uppercase;text-shadow:0 0 18px #ff4f91a8,0 0 45px #ff174f66}
+.subtitle{margin:0;color:#f6b8cf;font-size:clamp(12px,2.5vw,16px);letter-spacing:.28em;text-transform:uppercase;opacity:.82}
+.hint{position:absolute;bottom:max(26px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#e9a6c1a8;font:10px/1.5 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+@keyframes heartbeat{0%,100%{transform:scale(1)}8%{transform:scale(1.055)}16%{transform:scale(1)}24%{transform:scale(1.085)}36%{transform:scale(1)}}
+@keyframes heartFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes breathe{0%,100%{opacity:.55;scale:.88}50%{opacity:1;scale:1.12}}
+@keyframes ring{0%{transform:scale(.68);opacity:.65}100%{transform:scale(1.65);opacity:0}}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.5)}}
+@keyframes aurora{to{transform:rotate(360deg)}}
+@media(max-width:520px){.heart-wrap{width:min(72vw,300px);height:min(72vw,300px)}h1{letter-spacing:.12em}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:12s!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main class="scene" aria-label="Cinematic glowing heart animation">
+<canvas id="particles" aria-hidden="true"></canvas><div class="ambient"></div>
+<section class="content">
+<div class="heart-wrap" id="heartButton" role="button" tabindex="0" aria-label="Tap the heart to release glowing particles">
+<span class="sparkle s1"></span><span class="sparkle s2"></span><span class="sparkle s3"></span><span class="sparkle s4"></span>
+<svg class="heart" viewBox="0 0 300 280" role="img" aria-label="Glowing red heart">
+<defs>
+<linearGradient id="heartFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9dbd"/><stop offset=".28" stop-color="#ff477f"/><stop offset=".68" stop-color="#ed164f"/><stop offset="1" stop-color="#8d063c"/></linearGradient>
+<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<path d="M150 260 C125 235 20 157 20 83 C20 5 116 -8 150 61 C184 -8 280 5 280 83 C280 157 175 235 150 260Z"/>
+</svg>
+</div>
+<h1>Infinite Love</h1><p class="subtitle">A little light, endlessly yours</p>
+</section>
+<div class="hint">Tap the heart · Let the feeling glow</div>
+</main>
+<script>
+(()=>{'use strict';
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d',{alpha:true});
+let w=0,h=0,dpr=1,particles=[],last=0,raf=0;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rand=(a,b)=>Math.random()*(b-a)+a;
+function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.min(125,Math.max(48,Math.floor(w*h/10500)));particles=Array.from({length:count},()=>make(true))}
+function make(initial=false,x=rand(0,w),y=initial?rand(0,h):h+10){return{x,y,vx:rand(-.22,.22),vy:rand(-.48,-.12),r:rand(.7,2.2),a:rand(.18,.8),phase:rand(0,Math.PI*2),tw:rand(.008,.025),hue:Math.random()<.72?rand(330,355):rand(285,315)}}
+function draw(t){ctx.clearRect(0,0,w,h);const dt=Math.min(2,(t-last)/16.67||1);last=t;
+for(const p of particles){p.x+=p.vx*dt+Math.sin(t*.00035+p.phase)*.18;p.y+=p.vy*dt;p.phase+=p.tw*dt;p.a=.22+.58*(.5+.5*Math.sin(p.phase));if(p.y<-12||p.x<-20||p.x>w+20)Object.assign(p,make(false,rand(0,w),h+8));
+const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);glow.addColorStop(0,'hsla('+p.hue+',100%,94%,'+p.a+')');glow.addColorStop(.25,'hsla('+p.hue+',100%,70%,'+(p.a*.55)+')');glow.addColorStop(1,'hsla('+p.hue+',100%,60%,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,p.r*5,0,Math.PI*2);ctx.fill();
+ctx.fillStyle='rgba(255,235,245,'+(p.a*.85)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r*.7,0,Math.PI*2);ctx.fill();
+}
+if(!reduced)raf=requestAnimationFrame(draw)
+}
+function burst(x,y){for(let i=0;i<34;i++){const angle=rand(0,Math.PI*2),speed=rand(1,4);const p=make(false,x,y);p.vx=Math.cos(angle)*speed;p.vy=Math.sin(angle)*speed;p.r=rand(1.2,3);p.life=rand(35,75);p.max=p.life;particles.push(p)}if(particles.length>190)particles.splice(0,particles.length-190)}
+function animateBurst(){for(const p of particles){if(p.life!==undefined){p.x+=p.vx;p.y+=p.vy;p.vx*=.975;p.vy*=.975;p.life--;p.a=Math.max(0,p.life/p.max);if(p.life<=0)Object.assign(p,make(false,rand(0,w),h+8))}}}
+const originalDraw=draw;
+function frame(t){ctx.clearRect(0,0,w,h);const dt=Math.min(2,(t-last)/16.67||1);last=t;for(const p of particles){if(p.life!==undefined){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=.98;p.vy*=.98;p.life-=dt;p.a=Math.max(0,p.life/p.max)}else{p.x+=p.vx*dt+Math.sin(t*.00035+p.phase)*.18;p.y+=p.vy*dt;p.phase+=p.tw*dt;p.a=.22+.58*(.5+.5*Math.sin(p.phase));if(p.y<-12||p.x<-20||p.x>w+20)Object.assign(p,make(false,rand(0,w),h+8))}
+const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);g.addColorStop(0,'hsla('+p.hue+',100%,96%,'+p.a+')');g.addColorStop(.3,'hsla('+p.hue+',100%,68%,'+(p.a*.5)+')');g.addColorStop(1,'hsla('+p.hue+',100%,60%,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*5,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(255,240,247,'+(p.a*.9)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r*.65,0,Math.PI*2);ctx.fill()}
+if(!reduced)raf=requestAnimationFrame(frame)}
+function pop(e){const r=canvas.getBoundingClientRect();burst(e.clientX-r.left,e.clientY-r.top)}
+const heart=document.getElementById('heartButton');heart.addEventListener('pointerdown',pop);heart.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();const r=heart.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2)}});
+addEventListener('resize',resize,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf)}else{last=0;if(!reduced)raf=requestAnimationFrame(frame)}});
+resize();if(!reduced)raf=requestAnimationFrame(frame);else{for(const p of particles){p.vx=0;p.vy=0}frame(0)}
+})();
+</script>
+</body></html>

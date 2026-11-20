@@ -1,7 +1,0 @@
-{
-  "name": "love-animation-infinity",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "description": "Static cinematic love experience. No build step or dependencies."
-}
