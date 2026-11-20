@@ -127,7 +127,7 @@ function render(t){
    ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();
  }
  ctx.globalAlpha=1;
- if(!reduced)raf=requestAnimationFrame(render);
+ if(!reduced&&!paused)raf=requestAnimationFrame(render);
 }
 function changePalette(){
  paletteIndex=(paletteIndex+1)%palettes.length;
