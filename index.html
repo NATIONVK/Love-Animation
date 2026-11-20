@@ -19,7 +19,7 @@ body{font-family:Georgia,'Times New Roman',serif;color:#fff}
 .copy{position:absolute;z-index:4;left:0;right:0;bottom:max(9vh,55px);text-align:center;padding:0 18px;pointer-events:none;text-shadow:0 0 22px #ff286d77}
 h1{margin:0;font-size:clamp(30px,7vw,58px);font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:#fff0f6}
 .subtitle{margin:13px 0 0;font:10px/1.8 system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#f6a9c6b8}
-.hint{position:absolute;z-index:4;bottom:max(18px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font:9px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#d98aa888;pointer-events:none}
+.hint{position:absolute;z-index:4;bottom:max(18px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font:9px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#d98aa888;pointer-events:none}\n.controls{position:absolute;z-index:6;top:max(18px,env(safe-area-inset-top));right:16px;display:flex;gap:8px}\n.controls button{border:1px solid #ff9abd55;background:#1a0916a8;color:#ffd7e5;border-radius:999px;padding:10px 14px;font:9px system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}\n.controls button:active{transform:scale(.96);background:#6d123b}\n.controls button:focus-visible{outline:2px solid #ff9abd;outline-offset:3px}
 @keyframes aurora{to{transform:rotate(360deg)}}
 @keyframes pulseGlow{0%,100%{opacity:.55;scale:.88}50%{opacity:1;scale:1.08}}
 @media(max-height:620px){.copy{bottom:7vh}h1{font-size:clamp(25px,5vw,40px)}.subtitle{margin-top:6px}}
@@ -28,7 +28,7 @@ h1{margin:0;font-size:clamp(30px,7vw,58px);font-weight:400;letter-spacing:.24em;
 </head>
 <body>
 <main class="scene">
-<div class="vignette-glow"></div>
+<div class="vignette-glow"></div>\n<nav class="controls" aria-label="Animation controls"><button id="colorBtn" type="button">Color</button><button id="burstBtn" type="button">Pulse</button><button id="pauseBtn" type="button">Pause</button></nav>
 <canvas id="particle-heart" aria-label="A glowing heart made from animated particles"></canvas>
 <section class="copy">
 <h1>I Love You</h1>
@@ -48,7 +48,7 @@ const palettes=[
  {h:12,s:100,l:68},{h:155,s:90,l:66},{h:260,s:100,l:76},
  {h:180,s:100,l:70},{h:305,s:100,l:72},{h:95,s:90,l:68}
 ];
-let W=0,H=0,DPR=1,particles=[],targets=[],paletteIndex=0,raf=0,last=0;
+let W=0,H=0,DPR=1,particles=[],targets=[],paletteIndex=0,raf=0,last=0,paused=false;
 let pointer={x:0,y:0,active:false,down:false},lastTap=0;
 const rand=(a,b)=>Math.random()*(b-a)+a;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -134,6 +134,23 @@ function changePalette(){
  // A brief outward ripple, then all particles smoothly return to their heart targets.
  for(const p of particles){const dx=p.x-W/2,dy=p.y-H*.44,d=Math.hypot(dx,dy)||1;p.vx+=(dx/d)*rand(1.2,2.8);p.vy+=(dy/d)*rand(1.2,2.8)}
 }
+function pulseHeart(){
+ // Send a travelling wave through the particle field; spring forces reform the heart.
+ for(const p of particles){
+   const dx=p.x-W*.5,dy=p.y-H*.435,d=Math.hypot(dx,dy)||1;
+   p.vx+=(dx/d)*rand(2.2,5.2);p.vy+=(dy/d)*rand(2.2,5.2);
+ }
+}
+function togglePause(){
+ paused=!paused;
+ const b=document.getElementById('pauseBtn');
+ b.textContent=paused?'Resume':'Pause';
+ if(paused)cancelAnimationFrame(raf);
+ else{last=0;raf=requestAnimationFrame(render)}
+}
+document.getElementById('colorBtn').addEventListener('click',changePalette);
+document.getElementById('burstBtn').addEventListener('click',pulseHeart);
+document.getElementById('pauseBtn').addEventListener('click',togglePause);
 function pointFromEvent(e){const r=canvas.getBoundingClientRect();pointer.x=e.clientX-r.left;pointer.y=e.clientY-r.top}
 canvas.addEventListener('pointerdown',e=>{pointer.down=true;pointer.active=true;pointFromEvent(e);canvas.setPointerCapture?.(e.pointerId)});
 canvas.addEventListener('pointermove',e=>{if(pointer.down){pointer.active=true;pointFromEvent(e)}});
@@ -141,12 +158,12 @@ function release(){pointer.down=false;pointer.active=false}
 canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);
 canvas.addEventListener('click',e=>{
  const now=performance.now();
- if(now-lastTap<330){changePalette();lastTap=0}else lastTap=now;
+ if(now-lastTap<330){changePalette();lastTap=0}else{pulseHeart();lastTap=now;}
 });
 addEventListener('resize',dimensions,{passive:true});
 document.addEventListener('visibilitychange',()=>{
  if(document.hidden)cancelAnimationFrame(raf);
- else if(!reduced){last=0;raf=requestAnimationFrame(render)}
+ else if(!reduced&&!paused){last=0;raf=requestAnimationFrame(render)}
 });
 dimensions();
 if(!reduced)raf=requestAnimationFrame(render);
