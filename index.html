@@ -3,84 +3,155 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#08030b">
-<meta name="description" content="A continuous cinematic heart animation with floating particles and glowing romantic light.">
-<title>Love — Infinite Glow</title>
+<meta name="theme-color" content="#030207">
+<meta name="description" content="A cinematic heart formed from flowing luminous particles.">
+<title>I Love You — Infinite</title>
 <style>
-:root{color-scheme:dark;--pink:#ff4f91;--rose:#ff174f;--violet:#a855f7}
+:root{color-scheme:dark;--glow:#ff286d;--soft:#ff9abd}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08030b}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#030207}
 body{font-family:Georgia,'Times New Roman',serif;color:#fff}
-.scene{position:relative;width:100%;height:100%;min-height:100svh;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 47%,#321020 0%,#190914 35%,#0b0610 68%,#050308 100%)}
-.scene:before,.scene:after{content:"";position:absolute;inset:-30%;pointer-events:none;z-index:-1}
-.scene:before{background:conic-gradient(from 0deg at 50% 50%,transparent 0 22%,#ff287015 28%,transparent 38% 62%,#a855f714 72%,transparent 83%);filter:blur(65px);animation:aurora 28s linear infinite}
-.scene:after{background:radial-gradient(ellipse at center,transparent 25%,#030106aa 100%)}
-#particles{position:absolute;inset:0;width:100%;height:100%;z-index:1}
-.ambient{position:absolute;width:min(80vw,620px);aspect-ratio:1;left:50%;top:47%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#ff1b5b25 0%,#d4146a12 35%,transparent 70%);filter:blur(22px);animation:breathe 5s ease-in-out infinite;z-index:0}
-.content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;z-index:2}
-.heart-wrap{position:relative;width:min(57vw,330px);height:min(57vw,330px);display:grid;place-items:center;filter:drop-shadow(0 0 18px #ff1d6288) drop-shadow(0 0 55px #ff1d6244);animation:heartFloat 6s ease-in-out infinite}
-.heart-wrap:before,.heart-wrap:after{content:"";position:absolute;inset:12%;border:1px solid #ff7eae38;border-radius:50%;animation:ring 6s ease-out infinite}
-.heart-wrap:after{animation-delay:3s}
-.heart{width:100%;height:100%;overflow:visible;animation:heartbeat 2.15s ease-in-out infinite;transform-origin:50% 55%}
-.heart path{fill:url(#heartFill);stroke:#ff9cbd;stroke-width:1.2;filter:url(#glow)}
-.sparkle{position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px 3px #ff75ac,0 0 22px 7px #ff286c88;animation:twinkle 2.8s ease-in-out infinite}
-.sparkle.s1{top:12%;left:17%}.sparkle.s2{top:24%;right:9%;animation-delay:.8s;width:4px;height:4px}.sparkle.s3{bottom:17%;left:12%;animation-delay:1.5s;width:5px;height:5px}.sparkle.s4{bottom:12%;right:17%;animation-delay:.4s}
-h1{margin:26px 0 8px;font-size:clamp(28px,6vw,54px);font-weight:400;letter-spacing:.18em;text-transform:uppercase;text-shadow:0 0 18px #ff4f91a8,0 0 45px #ff174f66}
-.subtitle{margin:0;color:#f6b8cf;font-size:clamp(12px,2.5vw,16px);letter-spacing:.28em;text-transform:uppercase;opacity:.82}
-.hint{position:absolute;bottom:max(26px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#e9a6c1a8;font:10px/1.5 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase}
-@keyframes heartbeat{0%,100%{transform:scale(1)}8%{transform:scale(1.055)}16%{transform:scale(1)}24%{transform:scale(1.085)}36%{transform:scale(1)}}
-@keyframes heartFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
-@keyframes breathe{0%,100%{opacity:.55;scale:.88}50%{opacity:1;scale:1.12}}
-@keyframes ring{0%{transform:scale(.68);opacity:.65}100%{transform:scale(1.65);opacity:0}}
-@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.5)}}
+.scene{position:relative;width:100%;height:100%;height:100svh;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 46%,#260817 0%,#100611 42%,#05030a 78%,#020105 100%)}
+.scene:before{content:"";position:absolute;inset:-40%;z-index:0;pointer-events:none;background:conic-gradient(from 0deg,transparent 0 25%,#ff286d12 34%,transparent 45% 65%,#9b43ff10 76%,transparent 88%);filter:blur(70px);animation:aurora 32s linear infinite}
+.scene:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at center,transparent 38%,#020106a8 100%)}
+#particle-heart{position:absolute;inset:0;width:100%;height:100%;z-index:1;touch-action:pan-y}
+.vignette-glow{position:absolute;z-index:0;left:50%;top:46%;width:min(90vw,700px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#ff1b5b20 0%,#a20e5010 38%,transparent 70%);filter:blur(25px);animation:pulseGlow 5s ease-in-out infinite}
+.copy{position:absolute;z-index:4;left:0;right:0;bottom:max(9vh,55px);text-align:center;padding:0 18px;pointer-events:none;text-shadow:0 0 22px #ff286d77}
+h1{margin:0;font-size:clamp(30px,7vw,58px);font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:#fff0f6}
+.subtitle{margin:13px 0 0;font:10px/1.8 system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#f6a9c6b8}
+.hint{position:absolute;z-index:4;bottom:max(18px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font:9px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#d98aa888;pointer-events:none}
 @keyframes aurora{to{transform:rotate(360deg)}}
-@media(max-width:520px){.heart-wrap{width:min(72vw,300px);height:min(72vw,300px)}h1{letter-spacing:.12em}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:12s!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+@keyframes pulseGlow{0%,100%{opacity:.55;scale:.88}50%{opacity:1;scale:1.08}}
+@media(max-height:620px){.copy{bottom:7vh}h1{font-size:clamp(25px,5vw,40px)}.subtitle{margin-top:6px}}
+@media(prefers-reduced-motion:reduce){.scene:before,.vignette-glow{animation:none}}
 </style>
 </head>
 <body>
-<main class="scene" aria-label="Cinematic glowing heart animation">
-<canvas id="particles" aria-hidden="true"></canvas><div class="ambient"></div>
-<section class="content">
-<div class="heart-wrap" id="heartButton" role="button" tabindex="0" aria-label="Tap the heart to release glowing particles">
-<span class="sparkle s1"></span><span class="sparkle s2"></span><span class="sparkle s3"></span><span class="sparkle s4"></span>
-<svg class="heart" viewBox="0 0 300 280" role="img" aria-label="Glowing red heart">
-<defs>
-<linearGradient id="heartFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9dbd"/><stop offset=".28" stop-color="#ff477f"/><stop offset=".68" stop-color="#ed164f"/><stop offset="1" stop-color="#8d063c"/></linearGradient>
-<filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<path d="M150 260 C125 235 20 157 20 83 C20 5 116 -8 150 61 C184 -8 280 5 280 83 C280 157 175 235 150 260Z"/>
-</svg>
-</div>
-<h1>Infinite Love</h1><p class="subtitle">A little light, endlessly yours</p>
+<main class="scene">
+<div class="vignette-glow"></div>
+<canvas id="particle-heart" aria-label="A glowing heart made from animated particles"></canvas>
+<section class="copy">
+<h1>I Love You</h1>
+<p class="subtitle">A thousand lights · One heartbeat · Forever</p>
 </section>
-<div class="hint">Tap the heart · Let the feeling glow</div>
+<div class="hint">Touch the heart · Double tap to change colors</div>
 </main>
 <script>
-(()=>{'use strict';
-const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d',{alpha:true});
-let w=0,h=0,dpr=1,particles=[],last=0,raf=0;
-const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+(()=> {
+'use strict';
+const canvas=document.getElementById('particle-heart');
+const ctx=canvas.getContext('2d',{alpha:true});
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const palettes=[
+ {h:350,s:100,l:68},{h:330,s:100,l:72},{h:285,s:95,l:72},
+ {h:195,s:100,l:70},{h:42,s:100,l:70},{h:0,s:0,l:94},
+ {h:12,s:100,l:68},{h:155,s:90,l:66},{h:260,s:100,l:76},
+ {h:180,s:100,l:70},{h:305,s:100,l:72},{h:95,s:90,l:68}
+];
+let W=0,H=0,DPR=1,particles=[],targets=[],paletteIndex=0,raf=0,last=0;
+let pointer={x:0,y:0,active:false,down:false},lastTap=0;
 const rand=(a,b)=>Math.random()*(b-a)+a;
-function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.min(125,Math.max(48,Math.floor(w*h/10500)));particles=Array.from({length:count},()=>make(true))}
-function make(initial=false,x=rand(0,w),y=initial?rand(0,h):h+10){return{x,y,vx:rand(-.22,.22),vy:rand(-.48,-.12),r:rand(.7,2.2),a:rand(.18,.8),phase:rand(0,Math.PI*2),tw:rand(.008,.025),hue:Math.random()<.72?rand(330,355):rand(285,315)}}
-function draw(t){ctx.clearRect(0,0,w,h);const dt=Math.min(2,(t-last)/16.67||1);last=t;
-for(const p of particles){p.x+=p.vx*dt+Math.sin(t*.00035+p.phase)*.18;p.y+=p.vy*dt;p.phase+=p.tw*dt;p.a=.22+.58*(.5+.5*Math.sin(p.phase));if(p.y<-12||p.x<-20||p.x>w+20)Object.assign(p,make(false,rand(0,w),h+8));
-const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);glow.addColorStop(0,'hsla('+p.hue+',100%,94%,'+p.a+')');glow.addColorStop(.25,'hsla('+p.hue+',100%,70%,'+(p.a*.55)+')');glow.addColorStop(1,'hsla('+p.hue+',100%,60%,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(p.x,p.y,p.r*5,0,Math.PI*2);ctx.fill();
-ctx.fillStyle='rgba(255,235,245,'+(p.a*.85)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r*.7,0,Math.PI*2);ctx.fill();
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function heartPoint(t){
+ const x=16*Math.pow(Math.sin(t),3);
+ const y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+ return{x,y};
 }
-if(!reduced)raf=requestAnimationFrame(draw)
+function dimensions(){
+ W=innerWidth;H=innerHeight;DPR=Math.min(devicePixelRatio||1,1.65);
+ canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);
+ canvas.style.width=W+'px';canvas.style.height=H+'px';
+ ctx.setTransform(DPR,0,0,DPR,0,0);
+ buildHeart();
 }
-function burst(x,y){for(let i=0;i<34;i++){const angle=rand(0,Math.PI*2),speed=rand(1,4);const p=make(false,x,y);p.vx=Math.cos(angle)*speed;p.vy=Math.sin(angle)*speed;p.r=rand(1.2,3);p.life=rand(35,75);p.max=p.life;particles.push(p)}if(particles.length>190)particles.splice(0,particles.length-190)}
-function animateBurst(){for(const p of particles){if(p.life!==undefined){p.x+=p.vx;p.y+=p.vy;p.vx*=.975;p.vy*=.975;p.life--;p.a=Math.max(0,p.life/p.max);if(p.life<=0)Object.assign(p,make(false,rand(0,w),h+8))}}}
-const originalDraw=draw;
-function frame(t){ctx.clearRect(0,0,w,h);const dt=Math.min(2,(t-last)/16.67||1);last=t;for(const p of particles){if(p.life!==undefined){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=.98;p.vy*=.98;p.life-=dt;p.a=Math.max(0,p.life/p.max)}else{p.x+=p.vx*dt+Math.sin(t*.00035+p.phase)*.18;p.y+=p.vy*dt;p.phase+=p.tw*dt;p.a=.22+.58*(.5+.5*Math.sin(p.phase));if(p.y<-12||p.x<-20||p.x>w+20)Object.assign(p,make(false,rand(0,w),h+8))}
-const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);g.addColorStop(0,'hsla('+p.hue+',100%,96%,'+p.a+')');g.addColorStop(.3,'hsla('+p.hue+',100%,68%,'+(p.a*.5)+')');g.addColorStop(1,'hsla('+p.hue+',100%,60%,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*5,0,Math.PI*2);ctx.fill();ctx.fillStyle='rgba(255,240,247,'+(p.a*.9)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r*.65,0,Math.PI*2);ctx.fill()}
-if(!reduced)raf=requestAnimationFrame(frame)}
-function pop(e){const r=canvas.getBoundingClientRect();burst(e.clientX-r.left,e.clientY-r.top)}
-const heart=document.getElementById('heartButton');heart.addEventListener('pointerdown',pop);heart.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();const r=heart.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2)}});
-addEventListener('resize',resize,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf)}else{last=0;if(!reduced)raf=requestAnimationFrame(frame)}});
-resize();if(!reduced)raf=requestAnimationFrame(frame);else{for(const p of particles){p.vx=0;p.vy=0}frame(0)}
+function buildHeart(){
+ const scale=Math.min(W/43,H/43,13.2);
+ const cx=W*.5,cy=H*.435;
+ const count=Math.round(clamp(W*H/1450,210,470));
+ targets=[];
+ // Uniformly distribute particles through the heart interior using rejection sampling.
+ while(targets.length<count){
+   const x=rand(-16,16),y=rand(-14,13);
+   const inside=Math.pow(x*x+y*y-1,3)-x*x*y*y*y<=0;
+   if(inside)targets.push({x:cx+x*scale,y:cy-y*scale});
+ }
+ // Add a denser luminous outline.
+ const edgeCount=Math.round(count*.22);
+ for(let i=0;i<edgeCount;i++){
+   const p=heartPoint(Math.PI*2*i/edgeCount);
+   targets.push({x:cx+p.x*scale,y:cy-p.y*scale,edge:true});
+ }
+ particles=targets.map((t,i)=>({
+   x:cx+rand(-24,24),y:cy+rand(-24,24),
+   ox:cx+rand(-W*.48,W*.48),oy:rand(-H*.2,H*1.2),
+   tx:t.x,ty:t.y,vx:0,vy:0,
+   size:t.edge?rand(1.15,2.1):rand(.65,1.55),
+   phase:rand(0,Math.PI*2),twinkle:rand(.012,.035),
+   edge:!!t.edge,seed:Math.random()
+ }));
+}
+function color(p,t){
+ const pal=palettes[paletteIndex];
+ const hue=(pal.h+Math.sin(p.phase*.7)*9+360)%360;
+ const light=clamp(pal.l+Math.sin(t*.001+p.phase)*10,48,94);
+ return 'hsla('+hue+','+pal.s+'%,'+light+'%,'+(p.edge?.94:.76)+')';
+}
+function render(t){
+ const dt=Math.min(2.2,(t-last)/16.67||1);last=t;
+ ctx.clearRect(0,0,W,H);
+ const pal=palettes[paletteIndex];
+ for(const p of particles){
+   const dx=p.tx-p.x,dy=p.ty-p.y;
+   // Smooth spring attraction: particles settle into a stable heart silhouette.
+   p.vx+=(dx*.012-p.vx*.105)*dt;
+   p.vy+=(dy*.012-p.vy*.105)*dt;
+   // Gentle breathing motion without shaking the heart outline.
+   const breathe=Math.sin(t*.0011+p.phase)*.45;
+   let tx=p.tx+breathe,ty=p.ty+breathe*.55;
+   if(pointer.active){
+     const rx=p.x-pointer.x,ry=p.y-pointer.y;
+     const dist=Math.sqrt(rx*rx+ry*ry)+.001;
+     if(dist<155){const force=(1-dist/155)*.52;p.vx+=(rx/dist)*force*dt;p.vy+=(ry/dist)*force*dt}
+   }
+   p.x+=(tx-p.x)*.012*dt+p.vx*dt;
+   p.y+=(ty-p.y)*.012*dt+p.vy*dt;
+   p.vx*=Math.pow(.91,dt);p.vy*=Math.pow(.91,dt);
+   p.phase+=p.twinkle*dt;
+   const tw=.55+.45*Math.sin(p.phase);
+   const r=p.size*(p.edge?1.15:1)*(.78+tw*.32);
+   // A soft halo under each luminous particle.
+   ctx.globalAlpha=.22+tw*.2;
+   ctx.fillStyle='hsla('+pal.h+',100%,65%,.55)';
+   ctx.beginPath();ctx.arc(p.x,p.y,r*3.1,0,Math.PI*2);ctx.fill();
+   ctx.globalAlpha=.55+tw*.42;ctx.fillStyle=color(p,t);
+   ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();
+ }
+ ctx.globalAlpha=1;
+ if(!reduced)raf=requestAnimationFrame(render);
+}
+function changePalette(){
+ paletteIndex=(paletteIndex+1)%palettes.length;
+ // A brief outward ripple, then all particles smoothly return to their heart targets.
+ for(const p of particles){const dx=p.x-W/2,dy=p.y-H*.44,d=Math.hypot(dx,dy)||1;p.vx+=(dx/d)*rand(1.2,2.8);p.vy+=(dy/d)*rand(1.2,2.8)}
+}
+function pointFromEvent(e){const r=canvas.getBoundingClientRect();pointer.x=e.clientX-r.left;pointer.y=e.clientY-r.top}
+canvas.addEventListener('pointerdown',e=>{pointer.down=true;pointer.active=true;pointFromEvent(e);canvas.setPointerCapture?.(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(pointer.down){pointer.active=true;pointFromEvent(e)}});
+function release(){pointer.down=false;pointer.active=false}
+canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);
+canvas.addEventListener('click',e=>{
+ const now=performance.now();
+ if(now-lastTap<330){changePalette();lastTap=0}else lastTap=now;
+});
+addEventListener('resize',dimensions,{passive:true});
+document.addEventListener('visibilitychange',()=>{
+ if(document.hidden)cancelAnimationFrame(raf);
+ else if(!reduced){last=0;raf=requestAnimationFrame(render)}
+});
+dimensions();
+if(!reduced)raf=requestAnimationFrame(render);
+else render(0);
 })();
 </script>
-</body></html>
+</body>
+</html>
