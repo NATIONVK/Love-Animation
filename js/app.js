@@ -7,7 +7,8 @@ import {drawHeart,drawInfinity} from './heart-engine.js';
 const $=id=>document.getElementById(id),canvas=$('cinema'),ctx=canvas.getContext('2d',{alpha:false});
 const manager=new SceneManager(),particles=new ParticleEngine(canvas),camera=new CameraEngine(),audio=new AudioEngine(),custom=new Customization();
 let W=innerWidth,H=innerHeight,D=1,last=0,started=false,quality='medium',reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,stars=[],petals=[],fireworks=[],hideTimer=0;
-const app=$('app'),hud=$('hud'),copy=$('cinemaCopy'),finale=$('finale');\nconst safeText=s=>String(s).replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[ch]));
+const app=$('app'),hud=$('hud'),copy=$('cinemaCopy'),finale=$('finale');
+const safeText=s=>String(s).replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[ch]));
 const sceneTitles=manager.scenes;
 function resize(){D=Math.min(devicePixelRatio||1,quality==='high'?1.8:1.25);W=innerWidth;H=innerHeight;canvas.width=Math.round(W*D);canvas.height=Math.round(H*D);canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(D,0,0,D,0,0);particles.resize(W,H);seed()}
 function seed(){stars=Array.from({length:quality==='low'?65:quality==='high'?260:145},()=>({x:Math.random()*W,y:Math.random()*H,r:.4+Math.random()*1.5,a:Math.random(),v:.2+Math.random()}));petals=Array.from({length:quality==='low'?10:28},()=>({x:Math.random()*W,y:Math.random()*H,s:3+Math.random()*6,r:Math.random()*6,v:.3+Math.random()}))}
